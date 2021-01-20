@@ -6,7 +6,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.server.FMLServerStartedEvent;
@@ -49,8 +48,8 @@ public class MiningTweaks {
     handleConfig();
   }
 
-  public void onConfigurationChangedEvent(OnConfigChangedEvent event) {
-    if (MOD_ID.equals(event.getModID())) {
+  public void onConfigurationChangedEvent(ModConfig.ModConfigEvent event) {
+    if (MOD_ID.equals(event.getConfig().getModId())) {
       handleConfig();
     }
   }
