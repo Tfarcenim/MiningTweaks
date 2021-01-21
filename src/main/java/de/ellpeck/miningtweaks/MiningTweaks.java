@@ -28,12 +28,14 @@ public class MiningTweaks {
     EVENT_BUS.addListener(this::serverstart);
   }
 
+  //todo, blockstate sensitive hardness?
   public static void handleConfig() {
     ConfigHandler.tweak_hardness.get().forEach(s -> {
-      String[] split = s.split("@");
-      Block block = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(split[0]));
-      block.blockHardness = Float.parseFloat(split[1]);
-    });
+              String[] split = s.split("@");
+              Block block = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(split[0]));
+              final float hardness = Float.parseFloat(split[1]);
+              block.getStateContainer().getValidStates().forEach(state -> state.hardness = hardness);
+            });
 
     ConfigHandler.tweak_mining_level.get().forEach(s -> {
       String[] split = s.split("@");
